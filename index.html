@@ -447,7 +447,8 @@ body.js-ready .rv.on{opacity:1;transform:none}
 
 .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1);margin-top:56px}
 .teac{background:var(--bg2);overflow:hidden;transition:background .3s}.teac:hover{background:var(--bg3)}
-.tea-ph{height:190px;background:var(--bg3);display:flex;align-items:flex-end;justify-content:flex-end;padding:10px 14px}
+.tea-ph{height:260px;background:var(--bg3);display:flex;align-items:flex-end;justify-content:flex-end;padding:10px 14px;position:relative;overflow:hidden}
+.tea-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
 .tea-init{font-family:var(--fd);font-size:56px;color:var(--t4);line-height:1}
 .tea-b{padding:20px 24px 28px}
 .tea-n{font-family:var(--fc);font-size:21px;font-weight:600;color:var(--t1);margin-bottom:2px}
@@ -1235,6 +1236,21 @@ footer{background:var(--bg);border-top:1px solid var(--b1);padding:72px var(--px
 
 </div>
   </section>
+</div>
+
+<!-- ════ ABOUT ════ -->
+<div class="page" id="page-about">
+<span id="skip-target" tabindex="-1" style="position:absolute;top:0"></span>
+<main id="main-content-about">
+  <div class="ihero"><div class="si"><div class="lbl">Who we are</div><h1>Meet the team.</h1><p>Every coach at R&B Fitness is qualified, experienced, and genuinely invested in your progress. This is who stands beside you.</p></div></div>
+  <section style="background:var(--bg1)"><div class="si">
+    <div class="team-grid">
+      <div class="teac rv"><div class="tea-ph"><div class="tea-init">RB</div></div><div class="tea-b"><div class="tea-n">Rob</div><div class="tea-r">Founder & Head Coach</div><p class="tea-bio">Level 4 qualified with over a decade of experience. Former parkour coach turned personal training specialist. Rob built R&B Fitness because he kept seeing people who wanted to change but felt invisible and unsupported wherever they went. So he built something different.</p><div class="tea-qs"><div class="tea-q">Level 4 PT</div><div class="tea-q">10+ Years</div><div class="tea-q">GP Referral</div><div class="tea-q">Parkour</div></div></div></div>
+      <div class="teac rv d1"><div class="tea-ph"><img src="jose.jpg" alt="Jose, Personal Trainer at R&B Fitness" loading="lazy"></div><div class="tea-b"><div class="tea-n">Jose</div><div class="tea-r">Personal Trainer</div><p class="tea-bio">Level 3 certified personal trainer specialising in high-intensity fitness. Jose meticulously crafts programmes that incorporate constantly varied, functional movements across cardio, gymnastics, flexibility, CrossFit, Hyrox, and weightlifting, all designed to optimise overall health and physical performance.</p><div class="tea-qs"><div class="tea-q">Level 3 PT</div><div class="tea-q">CrossFit</div><div class="tea-q">Hyrox</div><div class="tea-q">Gymnastics</div><div class="tea-q">Weightlifting</div></div></div></div>
+    </div>
+  </div></section>
+  <div class="fcta"><div class="si"><h2 style="color:var(--w)">Want to train with us?</h2><p>Book a free consultation and we'll match you with the right coach and sessions from day one.</p><div class="fcta-acts" style="margin-top:32px"><a class="btn" style="background:var(--w);color:var(--red)" href="javascript:void(0)" onclick="showPage('enquire')"><span class="btn-in">Book Free Consultation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span></a></div></div></div>
+</main>
 </div>
 
 <!-- ════ PRIVACY POLICY ════ -->
