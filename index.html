@@ -269,9 +269,9 @@ body.js-ready .rv.on{opacity:1;transform:none}
 /* VIDEO MODAL */
 .vid-modal{position:fixed;inset:0;z-index:9500;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.93);backdrop-filter:blur(14px)}
 .vid-modal.open{display:flex}
-.vid-modal-box{position:relative;width:90vw;max-width:960px;aspect-ratio:16/9;background:#000}
-.vid-modal-box iframe,.vid-modal-box video{width:100%;height:100%;border:none}
-.vid-modal-close{position:absolute;top:-46px;right:0;background:none;border:none;color:rgba(255,255,255,.65);cursor:pointer;font-family:var(--fc);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:8px;padding:4px 0;transition:color .2s}
+.vid-modal-box{position:relative;display:flex;align-items:center;justify-content:center;max-width:90vw;max-height:85vh;background:#000}
+.vid-modal-box iframe,.vid-modal-box video{max-width:90vw;max-height:85vh;border:none;display:block}
+.vid-modal-close{position:absolute;top:12px;right:12px;z-index:2;background:rgba(0,0,0,.6);border:none;color:rgba(255,255,255,.85);cursor:pointer;font-family:var(--fc);font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:8px;padding:8px 14px;transition:color .2s,background .2s;border-radius:4px}
 .vid-modal-close:hover{color:var(--w)}
 .vid-modal-close svg{width:16px;height:16px}
 
@@ -856,6 +856,9 @@ footer{background:var(--bg);border-top:1px solid var(--b1);padding:72px var(--px
       </div>
       <div class="rv d1">
         <div class="welcome-video-wrap" onclick="openVideoModal()" role="button" tabindex="0" aria-label="Play welcome video from Rob" onkeydown="if(event.key==='Enter'||event.key===' ')openVideoModal()">
+          <video muted loop playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6" aria-hidden="true">
+            <source src="https://portal.randbfitness.co.uk/static/welcome-video.mp4" type="video/mp4">
+          </video>
           <div class="wv-corner-tl" aria-hidden="true"></div>
           <div class="wv-corner-br" aria-hidden="true"></div>
           <div class="wv-ph">
@@ -881,17 +884,7 @@ footer{background:var(--bg);border-top:1px solid var(--b1);padding:72px var(--px
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
       Close
     </button>
-    <!--
-      REPLACE THIS COMMENT with your video embed:
-      YouTube: <iframe src="https://www.youtube.com/embed/YOUR_ID?autoplay=1" allow="autoplay;fullscreen" allowfullscreen></iframe>
-      Self-hosted: <video controls autoplay src="your-video.mp4"></video>
-    -->
-    <div style="display:flex;align-items:center;justify-content:center;height:100%;background:var(--bg2)">
-      <div style="text-align:center">
-        <p style="font-family:var(--fc);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--t2);margin-bottom:12px">Add your welcome video here</p>
-        <p style="font-size:13px;color:var(--t3)">YouTube embed or MP4: see comment in code</p>
-      </div>
-    </div>
+    <video id="welcomeVid" controls autoplay playsinline src="https://portal.randbfitness.co.uk/static/welcome-video.mp4" style="width:100%;height:100%;background:#000"></video>
   </div>
 </div>
 
@@ -1679,17 +1672,30 @@ document.addEventListener('DOMContentLoaded',function(){
   initReveal();
 });
 
+/* ══ WELCOME PREVIEW AUTOPLAY ══ */
+(function(){
+  const pv=document.querySelector('.welcome-video-wrap video');
+  if(!pv)return;
+  new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)pv.play();else pv.pause();});
+  },{threshold:.3}).observe(pv);
+})();
+
 /* ══ VIDEO MODAL ══ */
 function openVideoModal(){
   const m=document.getElementById('vidModal');
   m.classList.add('open');
   document.body.style.overflow='hidden';
+  const v=document.getElementById('welcomeVid');
+  if(v){v.currentTime=0;v.play();}
   m.querySelector('.vid-modal-close').focus();
 }
 function closeModal(e){if(e.target===document.getElementById('vidModal'))closeModalDirect();}
 function closeModalDirect(){
   document.getElementById('vidModal').classList.remove('open');
   document.body.style.overflow='';
+  const v=document.getElementById('welcomeVid');
+  if(v)v.pause();
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModalDirect();}});
 
